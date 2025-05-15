@@ -42,8 +42,6 @@ app.get('/lyrics', async (req, res) => {
   }
 });
 
-// Remove /api/search endpoint since Genius API is no longer used
-
 // Keep /image-proxy endpoint as is
 app.get('/image-proxy', async (req, res) => {
   const { url } = req.query;
