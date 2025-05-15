@@ -38,7 +38,7 @@ function App() {
     setSelectedSong(null);
     try {
       // Call backend API using environment variable or relative path
-      const res = await Axios.get(`${DEFAULT_PROXY_URL}/api/search`, {
+      const res = await Axios.get(`${DEFAULT_PROXY_URL}/search`, {
         params: {
           q: `${artist} ${song}`,
         },
