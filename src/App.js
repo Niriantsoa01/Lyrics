@@ -62,7 +62,8 @@ function App() {
     setCopySuccess("");
     setError("");
     try {
-      const proxyUrl = `http://localhost:5000/lyrics?url=${encodeURIComponent(
+      // Update proxy URL to deployed backend or serverless function URL
+      const proxyUrl = `${process.env.REACT_APP_PROXY_URL}/lyrics?url=${encodeURIComponent(
         songUrl
       )}`;
       const proxyRes = await Axios.get(proxyUrl);
