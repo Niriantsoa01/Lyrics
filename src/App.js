@@ -9,7 +9,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 // Enregistrer l'icône dans la bibliothèque
 library.add(faCopy);
 
-const DEFAULT_PROXY_URL = "https://lyrics-back-9o6c.onrender.com";
+const DEFAULT_PROXY_URL = "http://localhost:5000";
 
 function App() {
   const [artist, setArtist] = useState("");
@@ -38,7 +38,7 @@ function App() {
     setSelectedSong(null);
     try {
       // Call backend API explicitly with port 5000
-      const res = await Axios.get(`${process.env.REACT_APP_API_URL}/search`, {
+      const res = await Axios.get("http://localhost:5000/api/search", {
         params: {
           q: `${artist} ${song}`,
         },
@@ -191,7 +191,7 @@ function App() {
                   onClick={() => handleSongSelect(result)}
                 >
                   <img
-                    src={`${process.env.REACT_APP_API_URL}/image-proxy?url=${encodeURIComponent(result.song_art_image_thumbnail_url)}`}
+                    src={`http://localhost:5000/image-proxy?url=${encodeURIComponent(result.song_art_image_thumbnail_url)}`}
                     alt={result.full_title}
                     className="search-result-thumbnail"
                   />
