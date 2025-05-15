@@ -35,10 +35,10 @@ function App() {
     setSearchResults([]);
     setSelectedSong(null);
     try {
-      const res = await Axios.get("https://api.genius.com/search", {
+      // Call serverless function for search
+      const res = await Axios.get("/api/search", {
         params: {
           q: `${artist} ${song}`,
-        access_token: process.env.REACT_APP_GENIUS_API_KEY,
         },
       });
       const hits = res.data.response.hits;
@@ -63,7 +63,7 @@ function App() {
     setError("");
     try {
       // Update proxy URL to deployed backend or serverless function URL
-      const proxyUrl = `7iZDeF9jUkhepSeq4C00wdjvlS55tk0luHbVLxY5wFvAbM9m9a4tL7XATbVPdkhs/lyrics?url=${encodeURIComponent(
+      const proxyUrl = `${process.env.REACT_APP_PROXY_URL}/lyrics?url=${encodeURIComponent(
         songUrl
       )}`;
       const proxyRes = await Axios.get(proxyUrl);
