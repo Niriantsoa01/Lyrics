@@ -63,7 +63,7 @@ function App() {
     setError("");
     try {
       // Update proxy URL to deployed backend or serverless function URL
-      const proxyUrl = `${process.env.REACT_APP_PROXY_URL}/lyrics?url=${encodeURIComponent(
+      const proxyUrl = `7iZDeF9jUkhepSeq4C00wdjvlS55tk0luHbVLxY5wFvAbM9m9a4tL7XATbVPdkhs/lyrics?url=${encodeURIComponent(
         songUrl
       )}`;
       const proxyRes = await Axios.get(proxyUrl);
