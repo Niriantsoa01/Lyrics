@@ -1,36 +1,239 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat&display=swap");
+
 .App {
     min-height: 100vh;
     height: auto;
     text-align: center;
     font-family: "Montserrat", sans-serif;
+    background-color: #f9f9f9;
+    color: #113a5d;
+    padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1 {
     font-family: "Fredoka One", cursive;
-    color: #ff7a8a;
+    color: #2d3695;
+    margin-bottom: 20px;
 }
 
 pre {
     font-size: 24px;
     color: #113a5d;
-}
-
-hr {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #e6f0ff;
+    padding: 20px;
+    border-radius: 8px;
+    max-height: 400px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-y: auto;
+    text-align: left;
     margin-top: 20px;
-    width: 60%;
 }
 
-.inp {
-    width: 200px;
-    height: 40px;
-    border: 2px solid #113a5d;
-    margin: 0px 10px;
-    padding-left: 6px;
-    font-size: 22px;
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
-.btn {
-    width: 90px;
-    height: 40px;
+.col-4, .col-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.col-4 {
+    flex: 1 1 300px;
+    max-width: 400px;
+}
+
+.col-2 {
+    flex: 0 0 150px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    color: #2d3695;
+}
+
+input.form-control {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #2d3695 !important;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input.form-control:focus {
+    outline: none;
+    border-color: #113a5d;
+    box-shadow: 0 0 5px #113a5d;
+}
+
+button.btn {
+    padding: 10px 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    margin-top: 5px;
+    width: 50%;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+
+button.btn-primary {
+    background-color: #2d3695 !important;
+    color: white;
+}
+
+button.btn-primary:hover:not(:disabled) {
+    background-color: #2d3695 !important;
+}
+
+button.btn-primary:disabled {
+    background-color: #2d3695 !important;
+    cursor: not-allowed;
+}
+
+button.btn-secondary {
+    background-color: #ad1b1b !important;
+    color: white;
+    margin-top: 10px;
+}
+
+button.btn-secondary:hover:not(:disabled) {
+    background-color: #0d2a4a;
+}
+
+button.btn-secondary:disabled {
+    background-color: #7a8ca3;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #d9534f;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode h1 {
+    color: #ff7a8a;
+}
+
+.dark-mode h2 {
+    color: #ff7a8a;
+}
+
+.dark-mode pre {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+.dark-mode input.form-control {
+    background-color: #2c2c2c;
+    border-color: #2d3695 !important;
+    color: #e0e0e0;
+}
+
+.dark-mode input.form-control:focus {
+    border-color: #2d3695;
+    box-shadow: 0 0 5px #ff7a8a;
+}
+
+.dark-mode button.btn-primary {
+    background-color: #2d3695 !important;
+    color: #e3e0e0;
+}
+
+.dark-mode button.btn-primary:hover:not(:disabled) {
+    background-color: #2d3695 !important;
+}
+
+.dark-mode button.btn-secondary {
+    background-color: #ad1b1b !important;
+    color: #e3e0e0;
+}
+
+.dark-mode button.btn-secondary:hover:not(:disabled) {
+    background-color: #2d3695 !important;
+}
+
+.dark-mode .error-message {
+    color: #ff6b6b;
+}
+
+.dark-mode-toggle {
+    background-color: transparent;
+    border: 2px solid #2d3695;
+    color: #2d3695;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.dark-mode-toggle:hover {
+    background-color: #2d3695 !important;
+    color: white;
+}
+
+.actions-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lyrics-container {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    max-width: 800px;
+    width: 100%;
+}
+
+.btn-copy {
+    position: absolute;
+    background-color: #6f6364 !important;
+    border: none;
+    color: white;
+    left: 85%;
+    padding: 6px 10px;
+    max-width: 50px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    transition: background-color 0.3s ease;
+}
+
+.btn-copy .fas {
+    font-size: 16px !important;
+}
+
+.btn-copy:hover {
+    background-color: #e35c6a !important;
+}
+
+.dark-mode .btn-copy {
+    background-color: #ff7a8a !important;
+    color: #121212;
+}
+
+.dark-mode .btn-copy:hover {
+    background-color: #e35c6a;
 }
