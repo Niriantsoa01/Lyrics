@@ -91,7 +91,7 @@ app.get('/api/search', async (req, res) => {
   }
 
   try {
-    const response = await axios.get("https://api.genius.com/search", {
+    const response = await axios.get("https://api.genius.com/api/search", {
       params: { q },
       headers: {
         Authorization: `Bearer ${GENIUS_API_KEY}`,
