@@ -38,7 +38,7 @@ function App() {
     setSelectedSong(null);
     try {
       // Call backend API explicitly with port 5000
-      const res = await Axios.get(`${process.env.REACT_APP_API_URL}api/search`, {
+      const res = await Axios.get(`${process.env.REACT_APP_API_URL}/search`, {
         params: {
           q: `${artist} ${song}`,
         },
