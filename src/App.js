@@ -9,6 +9,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 // Enregistrer l'icône dans la bibliothèque
 library.add(faCopy);
 
+const DEFAULT_PROXY_URL = "http://localhost:5000";
+
 function App() {
   const [artist, setArtist] = useState("");
   const [song, setSong] = useState("");
@@ -35,8 +37,8 @@ function App() {
     setSearchResults([]);
     setSelectedSong(null);
     try {
-      // Call serverless function for search
-      const res = await Axios.get("/api/search", {
+      // Call backend API explicitly with port 5000
+      const res = await Axios.get("http://localhost:5000/api/search", {
         params: {
           q: `${artist} ${song}`,
         },
@@ -62,10 +64,9 @@ function App() {
     setCopySuccess("");
     setError("");
     try {
-      // Update proxy URL to deployed backend or serverless function URL
-      const proxyUrl = `${process.env.REACT_APP_PROXY_URL}/lyrics?url=${encodeURIComponent(
-        songUrl
-      )}`;
+      // Use REACT_APP_PROXY_URL or default to localhost:5000
+      const proxyBaseUrl = process.env.REACT_APP_PROXY_URL || DEFAULT_PROXY_URL;
+      const proxyUrl = `${proxyBaseUrl}/lyrics?url=${encodeURIComponent(songUrl)}`;
       const proxyRes = await Axios.get(proxyUrl);
       const lyricsText = proxyRes.data.lyrics;
       console.log("Lyrics fetched:", lyricsText ? "Yes" : "No");
@@ -117,9 +118,9 @@ function App() {
 
   function formatLyrics(lyrics) {
     // Split lyrics into lines
-    const lines = lyrics.split('\n');
+    const lines = lyrics.split('\\n');
 
-    const sectionTitleRegex = /^\[(couplet|verset|refrain)[^\]]*\]/i;
+    const sectionTitleRegex = /^\\[(couplet|verset|refrain)[^\\]]*\\]/i;
 
     // Render each line as a paragraph, with special class for section titles
     return lines.map((line, index) => {
@@ -190,7 +191,7 @@ function App() {
                   onClick={() => handleSongSelect(result)}
                 >
                   <img
-                    src={result.song_art_image_thumbnail_url}
+                    src={`http://localhost:5000/image-proxy?url=${encodeURIComponent(result.song_art_image_thumbnail_url)}`}
                     alt={result.full_title}
                     className="search-result-thumbnail"
                   />
