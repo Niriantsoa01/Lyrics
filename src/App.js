@@ -9,7 +9,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 // Enregistrer l'icône dans la bibliothèque
 library.add(faCopy);
 
-const DEFAULT_PROXY_URL = "http://localhost:5000";
+const DEFAULT_PROXY_URL = process.env.REACT_APP_PROXY_URL || "";
 
 function App() {
   const [artist, setArtist] = useState("");
@@ -37,8 +37,8 @@ function App() {
     setSearchResults([]);
     setSelectedSong(null);
     try {
-      // Call backend API explicitly with port 5000
-      const res = await Axios.get("http://localhost:5000/api/search", {
+      // Call backend API using environment variable or relative path
+      const res = await Axios.get(`${DEFAULT_PROXY_URL}/api/search`, {
         params: {
           q: `${artist} ${song}`,
         },
@@ -64,8 +64,8 @@ function App() {
     setCopySuccess("");
     setError("");
     try {
-      // Use REACT_APP_PROXY_URL or default to localhost:5000
-      const proxyBaseUrl = process.env.REACT_APP_PROXY_URL || DEFAULT_PROXY_URL;
+      // Use REACT_APP_PROXY_URL or default to relative path
+      const proxyBaseUrl = process.env.REACT_APP_PROXY_URL || "";
       const proxyUrl = `${proxyBaseUrl}/lyrics?url=${encodeURIComponent(songUrl)}`;
       const proxyRes = await Axios.get(proxyUrl);
       const lyricsText = proxyRes.data.lyrics;
@@ -191,7 +191,7 @@ function App() {
                   onClick={() => handleSongSelect(result)}
                 >
                   <img
-                    src={`http://localhost:5000/image-proxy?url=${encodeURIComponent(result.song_art_image_thumbnail_url)}`}
+                  src={`${DEFAULT_PROXY_URL}/image-proxy?url=${encodeURIComponent(result.song_art_image_thumbnail_url)}`}
                     alt={result.full_title}
                     className="search-result-thumbnail"
                   />

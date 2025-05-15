@@ -1,7 +1,12 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-  const { q } = req.query;
+  if (req.method !== "GET") {
+    res.setHeader("Allow", "GET");
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  const q = req.query.q;
   if (!q) {
     return res.status(400).json({ error: "Missing query parameter 'q'" });
   }
@@ -27,6 +32,9 @@ export default async function handler(req, res) {
       responseData: error.response ? error.response.data : null,
       stack: error.stack,
     });
+    if (error.response) {
+      console.error("Full error response data:", error.response.data);
+    }
     res.status(500).json({
       error: "Error fetching search results",
       details: error.response ? error.response.data : error.message,
