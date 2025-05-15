@@ -64,8 +64,8 @@ function App() {
     setCopySuccess("");
     setError("");
     try {
-      // Use REACT_APP_PROXY_URL or default to relative path
-      const proxyBaseUrl = process.env.REACT_APP_PROXY_URL || "";
+      // Use REACT_APP_PROXY_URL or default to DEFAULT_PROXY_URL
+      const proxyBaseUrl = process.env.REACT_APP_PROXY_URL || DEFAULT_PROXY_URL;
       const proxyUrl = `${proxyBaseUrl}/lyrics?url=${encodeURIComponent(songUrl)}`;
       const proxyRes = await Axios.get(proxyUrl);
       const lyricsText = proxyRes.data.lyrics;
