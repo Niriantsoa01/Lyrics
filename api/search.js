@@ -8,6 +8,7 @@ export default async function handler(req, res) {
 
   const GENIUS_API_KEY = process.env.GENIUS_API_KEY;
   if (!GENIUS_API_KEY) {
+    console.error("Missing Genius API key in environment variables");
     return res.status(500).json({ error: "Missing Genius API key" });
   }
 
@@ -20,7 +21,15 @@ export default async function handler(req, res) {
     });
     res.status(200).json(response.data);
   } catch (error) {
-    console.error("Error fetching search results:", error.response ? error.response.data : error.message);
-    res.status(500).json({ error: "Error fetching search results", details: error.response ? error.response.data : error.message });
+    console.error("Error fetching search results:", {
+      message: error.message,
+      responseStatus: error.response ? error.response.status : null,
+      responseData: error.response ? error.response.data : null,
+      stack: error.stack,
+    });
+    res.status(500).json({
+      error: "Error fetching search results",
+      details: error.response ? error.response.data : error.message,
+    });
   }
 }
