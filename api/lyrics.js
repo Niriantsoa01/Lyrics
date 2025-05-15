@@ -72,6 +72,8 @@ export default async function handler(req, res) {
       message: error.message,
       responseStatus: error.response ? error.response.status : null,
       responseData: error.response ? error.response.data : null,
+      headers: error.response ? error.response.headers : null,
+      config: error.config,
       stack: error.stack,
     });
     res.status(500).json({ error: "Failed to fetch lyrics page" });
