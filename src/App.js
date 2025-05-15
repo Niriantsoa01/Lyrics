@@ -9,7 +9,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 // Enregistrer l'icône dans la bibliothèque
 library.add(faCopy);
 
-const DEFAULT_PROXY_URL = process.env.REACT_APP_PROXY_URL || "";
+const DEFAULT_PROXY_URL = process.env.REACT_APP_PROXY_URL || "https://lyrics-back-9o6c.onrender.com";
 
 function App() {
   const [artist, setArtist] = useState("");
